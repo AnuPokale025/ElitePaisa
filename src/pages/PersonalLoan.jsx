@@ -10,6 +10,7 @@ import {
   IndianRupee,
   ChevronDown,
 } from "lucide-react";
+import ContactModal from "../modal/ContactModal";
 
 /* ------------------------------------------------------------------
   Same design system as LoanLandingPage.jsx / Navbar.jsx:
@@ -38,6 +39,7 @@ const features = [
     desc: "Affordable EMIs with flexible repayment options.",
   },
 ];
+
 
 const eligibility = [
   "Age between 21 and 60 years",
@@ -89,6 +91,7 @@ function FaqItem({ faq, isOpen, onToggle }) {
 
 const PersonalLoan = () => {
   const [openFaq, setOpenFaq] = useState(0);
+  const [openContact, setOpenContact] = useState(false);
 
   useEffect(() => {
     if (document.getElementById("pl-font-import")) return;
@@ -197,7 +200,7 @@ const PersonalLoan = () => {
               Fund what matters — a wedding, a move, an emergency — with low
               interest rates, minimal documentation, and approval within a day.
             </p>
-            <button className="pl-btn pl-btn-primary" style={{ marginTop: "2.2rem" }}>
+            <button className="pl-btn pl-btn-primary" onClick={()=>setOpenContact(true)} style={{ marginTop: "2.2rem" }}>
               Apply now <ArrowRight size={17} />
             </button>
           </div>
@@ -322,11 +325,15 @@ const PersonalLoan = () => {
           </div>
           <h2>Need a personal loan today?</h2>
           <p>Apply online in just a few minutes and receive approval within 24 hours.</p>
-          <button className="pl-btn pl-btn-primary">
+          <button onClick={()=>setOpenContact(true)} className="pl-btn pl-btn-primary">
             Apply now <ArrowRight size={18} />
           </button>
         </div>
       </section>
+      <ContactModal
+      isOpen={openContact}
+    onClose={()=>setOpenContact(false)}
+      />
     </div>
   );
 };

@@ -10,6 +10,7 @@ import {
   Building2,
   ChevronDown,
 } from "lucide-react";
+import ContactModal from "../modal/ContactModal";
 
 /* ------------------------------------------------------------------
   Same design system as LoanLandingPage.jsx / Navbar.jsx / PersonalLoan.jsx:
@@ -104,6 +105,7 @@ function FaqItem({ item, isOpen, onToggle }) {
 
 const HomeLoan = () => {
   const [openFaq, setOpenFaq] = useState(0);
+  const [openModal, setOpenModal] = useState();
 
   useEffect(() => {
     if (document.getElementById("hl-font-import")) return;
@@ -226,7 +228,7 @@ const HomeLoan = () => {
               Buy your dream home with flexible repayment options,
               competitive interest rates, and instant approval.
             </p>
-            <button className="hl-btn hl-btn-primary" style={{ marginTop: "2.2rem" }}>
+            <button onClick={() => setOpenModal(true)} className="hl-btn hl-btn-primary" style={{ marginTop: "2.2rem" }}>
               Apply now <ArrowRight size={17} />
             </button>
           </div>
@@ -384,11 +386,15 @@ const HomeLoan = () => {
           </div>
           <h2>Ready to own your dream home?</h2>
           <p>Apply online today and get instant approval with flexible EMI options.</p>
-          <button className="hl-btn hl-btn-primary">
+          <button onClick={() => setOpenModal(true)} className="hl-btn hl-btn-primary">
             Apply now <ArrowRight size={18} />
           </button>
         </div>
       </section>
+      <ContactModal
+        isOpen={openModal}
+        onClose={() => setOpenModal(false)}
+      />
     </div>
   );
 };

@@ -10,6 +10,7 @@ import {
   ArrowRight,
   ChevronDown,
 } from "lucide-react";
+import ContactModal from "../modal/ContactModal";
 
 /* ------------------------------------------------------------------
   Same design system as LoanLandingPage.jsx / Navbar.jsx /
@@ -105,6 +106,7 @@ function FaqItem({ item, isOpen, onToggle }) {
 
 const BusinessLoan = () => {
   const [openFaq, setOpenFaq] = useState(0);
+  const [openModal, setOpenModal] = useState();
 
   useEffect(() => {
     if (document.getElementById("bl-font-import")) return;
@@ -238,7 +240,7 @@ const BusinessLoan = () => {
               Fuel your business growth with quick approvals, low interest
               rates, and flexible repayment options.
             </p>
-            <button className="bl-btn bl-btn-primary" style={{ marginTop: "2.2rem" }}>
+            <button onClick={() => setOpenModal(true)} className="bl-btn bl-btn-primary" style={{ marginTop: "2.2rem" }}>
               Apply now <ArrowRight size={17} />
             </button>
           </div>
@@ -407,11 +409,15 @@ const BusinessLoan = () => {
           </div>
           <h2>Ready to grow your business?</h2>
           <p>Apply today and get the financial support your business needs.</p>
-          <button className="bl-btn bl-btn-primary">
+          <button onClick={() => setOpenModal(true)} className="bl-btn bl-btn-primary">
             Apply now <ArrowRight size={18} />
           </button>
         </div>
       </section>
+      <ContactModal
+        isOpen={openModal}
+        onClose={() => setOpenModal(false)}
+      />
     </div>
   );
 };

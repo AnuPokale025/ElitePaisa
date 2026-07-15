@@ -15,6 +15,7 @@ import {
   X,
   TrendingUp,
 } from "lucide-react";
+import ContactModal from "../modal/ContactModal";
 
 /* ------------------------------------------------------------------
   DESIGN TOKENS
@@ -118,61 +119,6 @@ const stats = [
   ["99%", "Customer Satisfaction"],
 ];
 
-/* ---------------------------- Contact Modal ---------------------------- */
-
-function ContactModal({ isOpen, onClose, context }) {
-  const [submitted, setSubmitted] = useState(false);
-
-  if (!isOpen) return null;
-
-  return (
-    <div
-      className="lp-overlay"
-      role="dialog"
-      aria-modal="true"
-      onClick={onClose}
-    >
-      <div className="lp-modal" onClick={(e) => e.stopPropagation()}>
-        <button className="lp-modal-close" onClick={onClose} aria-label="Close">
-          <X size={18} />
-        </button>
-
-        {submitted ? (
-          <div className="lp-modal-success">
-            <CheckCircle2 size={40} />
-            <h3>Request received</h3>
-            <p>A loan officer will call you within 24 hours.</p>
-          </div>
-        ) : (
-          <>
-            <p className="lp-modal-eyebrow">Apply now</p>
-            <h3 className="lp-modal-title">
-              {context ? context : "Talk to a loan officer"}
-            </h3>
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                setSubmitted(true);
-              }}
-            >
-              <label>
-                Full name
-                <input type="text" required placeholder="Your name" />
-              </label>
-              <label>
-                Phone number
-                <input type="tel" required placeholder="10-digit mobile number" />
-              </label>
-              <button type="submit" className="lp-btn lp-btn-primary lp-btn-block">
-                Request a callback
-              </button>
-            </form>
-          </>
-        )}
-      </div>
-    </div>
-  );
-}
 
 /* ------------------------------- Ticker -------------------------------- */
 

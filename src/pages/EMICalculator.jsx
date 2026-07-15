@@ -1,5 +1,6 @@
 import React, { useState, useMemo, useEffect } from "react";
 import { Calculator, IndianRupee, Percent, Calendar, Zap, PiggyBank, GitCompare } from "lucide-react";
+import ContactModal from "../modal/ContactModal";
 
 /* ------------------------------------------------------------------
   Same design system as the rest of the site:
@@ -40,6 +41,7 @@ const EMICalculator = () => {
   const [loanAmount, setLoanAmount] = useState(500000);
   const [interestRate, setInterestRate] = useState(10);
   const [tenure, setTenure] = useState(5);
+  const [openModal, setOpenModal] = useState();
 
   useEffect(() => {
     if (document.getElementById("ec-font-import")) return;
@@ -294,7 +296,7 @@ const EMICalculator = () => {
               <span><span className="ec-dot" style={{ background: "#9CC0FF" }} />Interest {100 - principalPct}%</span>
             </div>
 
-            <button className="ec-cta-btn">Apply for loan</button>
+            <button onClick={() => setOpenModal(true)} className="ec-cta-btn">Apply for loan</button>
           </div>
         </div>
       </section>
@@ -319,6 +321,10 @@ const EMICalculator = () => {
           })}
         </div>
       </section>
+      <ContactModal
+        isOpen={openModal}
+        onClose={() => setOpenModal(false)}
+      />
     </div>
   );
 };

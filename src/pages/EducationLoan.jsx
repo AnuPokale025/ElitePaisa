@@ -10,6 +10,7 @@ import {
   ArrowRight,
   ChevronDown,
 } from "lucide-react";
+import ContactModal from "../modal/ContactModal";
 
 /* ------------------------------------------------------------------
   Same design system as LoanLandingPage.jsx / Navbar.jsx /
@@ -103,6 +104,7 @@ function FaqItem({ item, isOpen, onToggle }) {
 
 const EducationLoan = () => {
   const [openFaq, setOpenFaq] = useState(0);
+  const [openModal, setOpenModal] = useState();
 
   useEffect(() => {
     if (document.getElementById("el-font-import")) return;
@@ -226,7 +228,7 @@ const EducationLoan = () => {
               Achieve your academic dreams with affordable education loans
               for studies in India and abroad.
             </p>
-            <button className="el-btn el-btn-primary" style={{ marginTop: "2.2rem" }}>
+            <button onClick={() => setOpenModal(true)} className="el-btn el-btn-primary" style={{ marginTop: "2.2rem" }}>
               Apply now <ArrowRight size={17} />
             </button>
           </div>
@@ -375,11 +377,15 @@ const EducationLoan = () => {
           </div>
           <h2>Invest in your future</h2>
           <p>Start your education journey today with flexible education loans.</p>
-          <button className="el-btn el-btn-primary">
+          <button onClick={() => setOpenModal(true)} className="el-btn el-btn-primary">
             Apply now <ArrowRight size={18} />
           </button>
         </div>
       </section>
+      <ContactModal
+        isOpen={openModal}
+        onClose={() => setOpenModal}
+      />
     </div>
   );
 };

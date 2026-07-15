@@ -12,6 +12,7 @@ import {
   ArrowRight,
   ChevronDown,
 } from "lucide-react";
+import ContactModal from "../modal/ContactModal";
 
 /* ------------------------------------------------------------------
   Same design system as LoanLandingPage.jsx / Navbar.jsx /
@@ -116,6 +117,7 @@ function FaqItem({ faq, isOpen, onToggle }) {
 
 const VehicleLoan = () => {
   const [openFaq, setOpenFaq] = useState(0);
+  const [openModal, setOpenModal] = useState();
 
   useEffect(() => {
     if (document.getElementById("vl-font-import")) return;
@@ -229,7 +231,7 @@ const VehicleLoan = () => {
               Finance your dream vehicle with quick approval, attractive
               interest rates and flexible repayment.
             </p>
-            <button className="vl-btn vl-btn-primary" style={{ marginTop: "2.2rem" }}>
+            <button onClick={() => setOpenModal(true)} className="vl-btn vl-btn-primary" style={{ marginTop: "2.2rem" }}>
               Apply now <ArrowRight size={17} />
             </button>
           </div>
@@ -369,11 +371,15 @@ const VehicleLoan = () => {
           </div>
           <h2>Ready to finance your vehicle?</h2>
           <p>Apply today and get quick approval with flexible EMI options.</p>
-          <button className="vl-btn vl-btn-primary">
+          <button onClick={() => setOpenModal(true)} className="vl-btn vl-btn-primary">
             Apply now <ArrowRight size={18} />
           </button>
         </div>
       </section>
+      <ContactModal
+        isOpen={openModal}
+        onClose={() => setOpenModal(false)}
+      />
     </div>
   );
 };

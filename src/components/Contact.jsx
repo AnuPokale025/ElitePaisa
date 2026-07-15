@@ -12,6 +12,7 @@ import {
   X,
   CheckCircle2,
 } from "lucide-react";
+import ContactModal from "../modal/ContactModal";
 
 /* ------------------------------------------------------------------
   Same design system as the rest of the site:
@@ -78,45 +79,7 @@ function FaqItem({ item, isOpen, onToggle }) {
   );
 }
 
-function ApplyModal({ isOpen, onClose }) {
-  const [submitted, setSubmitted] = useState(false);
-  if (!isOpen) return null;
 
-  return (
-    <div className="ct-overlay" role="dialog" aria-modal="true" onClick={onClose}>
-      <div className="ct-modal" onClick={(e) => e.stopPropagation()}>
-        <button className="ct-modal-close" onClick={onClose} aria-label="Close">
-          <X size={18} />
-        </button>
-        {submitted ? (
-          <div className="ct-modal-success">
-            <CheckCircle2 size={40} />
-            <h3>Request received</h3>
-            <p>A loan officer will call you within 24 hours.</p>
-          </div>
-        ) : (
-          <>
-            <p className="ct-modal-eyebrow">Apply now</p>
-            <h3 className="ct-modal-title">Talk to a loan officer</h3>
-            <form onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }}>
-              <label>
-                Full name
-                <input type="text" required placeholder="Your name" />
-              </label>
-              <label>
-                Phone number
-                <input type="tel" required placeholder="10-digit mobile number" />
-              </label>
-              <button type="submit" className="ct-btn ct-btn-solid ct-btn-block">
-                Request a callback
-              </button>
-            </form>
-          </>
-        )}
-      </div>
-    </div>
-  );
-}
 
 const Contact = () => {
   const [openContact, setOpenContact] = useState(false);
@@ -387,7 +350,7 @@ const Contact = () => {
         </div>
       </section>
 
-      <ApplyModal isOpen={openContact} onClose={() => setOpenContact(false)} />
+      <ContactModal isOpen={openContact} onClose={() => setOpenContact(false)} />
     </div>
   );
 };

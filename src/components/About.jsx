@@ -10,6 +10,7 @@ import {
   ArrowRight,
   X,
 } from "lucide-react";
+import ContactModal from "../modal/ContactModal";
 
 /* ------------------------------------------------------------------
   Same design system as the rest of the site:
@@ -60,50 +61,11 @@ const team = [
   { name: "Amit Verma", role: "Customer Success Manager" },
 ];
 
-/* ---------------------------- Contact Modal ---------------------------- */
 
-function ContactModal({ isOpen, onClose }) {
-  const [submitted, setSubmitted] = useState(false);
-  if (!isOpen) return null;
-
-  return (
-    <div className="ab-overlay" role="dialog" aria-modal="true" onClick={onClose}>
-      <div className="ab-modal" onClick={(e) => e.stopPropagation()}>
-        <button className="ab-modal-close" onClick={onClose} aria-label="Close">
-          <X size={18} />
-        </button>
-        {submitted ? (
-          <div className="ab-modal-success">
-            <CheckCircle2 size={40} />
-            <h3>Request received</h3>
-            <p>A loan officer will call you within 24 hours.</p>
-          </div>
-        ) : (
-          <>
-            <p className="ab-modal-eyebrow">Apply now</p>
-            <h3 className="ab-modal-title">Talk to a loan officer</h3>
-            <form onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }}>
-              <label>
-                Full name
-                <input type="text" required placeholder="Your name" />
-              </label>
-              <label>
-                Phone number
-                <input type="tel" required placeholder="10-digit mobile number" />
-              </label>
-              <button type="submit" className="ab-btn ab-btn-solid ab-btn-block">
-                Request a callback
-              </button>
-            </form>
-          </>
-        )}
-      </div>
-    </div>
-  );
-}
 
 const About = () => {
   const [openContact, setOpenContact] = useState(false);
+  const [openModal, setOpenModal] = useState();
 
   useEffect(() => {
     if (document.getElementById("ab-font-import")) return;
@@ -257,7 +219,7 @@ const About = () => {
               while maintaining the highest standards of transparency and
               customer service.
             </p>
-            <button className="ab-btn ab-btn-solid" style={{ marginTop: "2rem" }} onClick={() => setOpenContact(true)}>
+            <button className="ab-btn ab-btn-solid" onClick={()=>setOpenModal(true)} style={{ marginTop: "2rem" }} onClick={() => setOpenContact(true)}>
               Apply now <ArrowRight size={18} />
             </button>
           </div>
@@ -361,7 +323,7 @@ const About = () => {
             Apply online today and receive quick approval with transparent
             terms and competitive interest rates.
           </p>
-          <button className="ab-btn ab-btn-primary" onClick={() => setOpenContact(true)}>
+          <button onClick={()=>setOpenModal(true)} className="ab-btn ab-btn-primary" onClick={() => setOpenContact(true)}>
             Apply for a loan <ArrowRight size={18} />
           </button>
         </div>
