@@ -13,8 +13,8 @@ import HomeLoan from "./pages/HomeLoan";
 import BusinessLoan from "./pages/BusinessLoan";
 import EducationLoan from "./pages/EducationLoan";
 import VehicleLoan from "./pages/VehicleLoan"
-import Login from "./pages/LOgin";
-import Register from "../src/pages/Register"
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 
 function App() {

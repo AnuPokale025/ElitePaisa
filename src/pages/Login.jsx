@@ -118,7 +118,7 @@ const Login = () => {
               {/* Register */}
               <button
                 type="button"
-                onClick={()=>{navigate('/login')}}
+              onClick={()=>{navigate('/register')}}
                 className="w-full border-2 border-blue-700 text-blue-700 hover:bg-blue-700 hover:text-white py-3 rounded-xl font-semibold transition"
               >
                 Create New Account
