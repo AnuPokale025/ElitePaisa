@@ -8,13 +8,13 @@ import Contact from "./components/Contact";
 import "./App.css";
 import FAQ from "./pages/FAQ";
 import Blog from "./pages/Blog";
-import PersonalLoan from "./pages/Personalloan";
 import HomeLoan from "./pages/HomeLoan";
 import BusinessLoan from "./pages/BusinessLoan";
 import EducationLoan from "./pages/EducationLoan";
 import VehicleLoan from "./pages/VehicleLoan"
-import Login from "./pages/Login";
-import Register from "./pages/Register";
+import Login from "./pages/LOgin";
+import Register from "../src/pages/Register"
+import PersonalLoan from "./pages/PersonalLoan";
 
 
 function App() {
@@ -27,15 +27,15 @@ function App() {
         <Route path="/emi" element={<EMICalculator />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
-        <Route  path="/FAQ" element={<FAQ/>} />
-        <Route path="/blog" element={<Blog/>} />
-        <Route path="personal-loan" element={ <PersonalLoan/>} />
-        <Route path="home-loan" element={ <HomeLoan/>} />
-        <Route path="business-loan" element={ <BusinessLoan/>} />
-        <Route path="education-loan" element={ <EducationLoan/>} />
-        <Route path="vehicle-loan" element={ <VehicleLoan/>} />
-        <Route path="/login" element={<Login/>} />
-        <Route path="/register" element={<Register/>} />
+        <Route path="/FAQ" element={<FAQ />} />
+        <Route path="/blog" element={<Blog />} />
+        <Route path="personal-loan" element={<PersonalLoan />} />
+        <Route path="home-loan" element={<HomeLoan />} />
+        <Route path="business-loan" element={<BusinessLoan />} />
+        <Route path="education-loan" element={<EducationLoan />} />
+        <Route path="vehicle-loan" element={<VehicleLoan />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
 
       <Footer />
