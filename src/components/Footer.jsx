@@ -1,4 +1,6 @@
+
 import React from "react";
+import { Link } from "react-router-dom";
 import {
   Phone,
   Mail,
@@ -8,14 +10,34 @@ import {
 } from "lucide-react";
 
 const Footer = () => {
+  // Quick Link routes
+  const quickLinks = [
+    { name: "Home", path: "/" },
+    { name: "About Us", path: "/about" },
+    { name: "Services", path: "/services" },
+    { name: "EMI Calculator", path: "/emi-calculator" },
+    { name: "Contact", path: "/contact" },
+    { name: "FAQs", path: "/faq" },
+  ];
+
+  // Loan Service routes
+  const loanServices = [
+    { name: "Personal Loan", path: "/personal-loan" },
+    { name: "Home Loan", path: "/home-loan" },
+    { name: "Business Loan", path: "/business-loan" },
+    { name: "Education Loan", path: "/education-loan" },
+    { name: "Vehicle Loan", path: "/vehicle-loan" },
+  ];
+
   return (
     <footer className="bg-slate-900 text-gray-300">
       {/* Top Section */}
       <div className="max-w-7xl mx-auto px-6 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
+
           {/* Company */}
           <div className="lg:col-span-2">
-            <div className="flex items-center gap-3">
+            <Link to="/" className="flex items-center gap-3">
               <div className="bg-blue-600 w-12 h-12 rounded-lg flex items-center justify-center text-white font-bold text-2xl">
                 E
               </div>
@@ -24,47 +46,18 @@ const Footer = () => {
                 <h2 className="text-2xl font-bold text-white">
                   Elite<span className="text-blue-500">Paisa</span>
                 </h2>
+
                 <p className="text-sm text-gray-400">
                   Fast • Secure • Trusted
                 </p>
               </div>
-            </div>
+            </Link>
 
             <p className="mt-6 leading-7 text-gray-400">
-              LoanHub helps individuals and businesses achieve their financial
-              goals with quick loan approvals, competitive interest rates, and
-              transparent lending solutions.
+              ElitePaisa helps individuals and businesses achieve their
+              financial goals with quick loan approvals, competitive interest
+              rates, and transparent lending solutions.
             </p>
-
-            {/* <div className="flex gap-4 mt-8">
-              <a
-                href="#"
-                className="w-10 h-10 rounded-full bg-slate-800 hover:bg-blue-600 flex items-center justify-center transition"
-              >
-                <Facebook size={18} />
-              </a>
-
-              <a
-                href="#"
-                className="w-10 h-10 rounded-full bg-slate-800 hover:bg-blue-600 flex items-center justify-center transition"
-              >
-                <Twitter size={18} />
-              </a>
-
-              <a
-                href="#"
-                className="w-10 h-10 rounded-full bg-slate-800 hover:bg-blue-600 flex items-center justify-center transition"
-              >
-                <Instagram size={18} />
-              </a>
-
-              <a
-                href="#"
-                className="w-10 h-10 rounded-full bg-slate-800 hover:bg-blue-600 flex items-center justify-center transition"
-              >
-                <Linkedin size={18} />
-              </a>
-            </div> */}
           </div>
 
           {/* Quick Links */}
@@ -74,21 +67,14 @@ const Footer = () => {
             </h3>
 
             <ul className="space-y-3">
-              {[
-                "Home",
-                "About Us",
-                "Services",
-                "EMI Calculator",
-                "Contact",
-                "FAQs",
-              ].map((item) => (
-                <li key={item}>
-                  <a
-                    href="#"
+              {quickLinks.map((item) => (
+                <li key={item.name}>
+                  <Link
+                    to={item.path}
                     className="hover:text-blue-400 transition"
                   >
-                    {item}
-                  </a>
+                    {item.name}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -101,21 +87,14 @@ const Footer = () => {
             </h3>
 
             <ul className="space-y-3">
-              {[
-                "Personal Loan",
-                "Home Loan",
-                "Business Loan",
-                "Education Loan",
-                "Car Loan",
-                "Gold Loan",
-              ].map((loan) => (
-                <li key={loan}>
-                  <a
-                    href="#"
+              {loanServices.map((loan) => (
+                <li key={loan.name}>
+                  <Link
+                    to={loan.path}
                     className="hover:text-blue-400 transition"
                   >
-                    {loan}
-                  </a>
+                    {loan.name}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -131,9 +110,9 @@ const Footer = () => {
               <div className="flex gap-3">
                 <MapPin className="text-blue-500 mt-1" size={20} />
                 <p>
-                  123 Finance Street,
+                  Elite Associate in Nagpur,
                   <br />
-                  Mumbai, Maharashtra
+                  Nagpur, Maharashtra
                 </p>
               </div>
 
@@ -155,6 +134,7 @@ const Footer = () => {
           <div>
             <div className="flex items-center gap-2">
               <ShieldCheck className="text-blue-500" />
+
               <h3 className="text-2xl font-semibold text-white">
                 Subscribe to Our Newsletter
               </h3>
@@ -183,26 +163,35 @@ const Footer = () => {
       <div className="border-t border-slate-800">
         <div className="max-w-7xl mx-auto px-6 py-6 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-sm text-gray-500">
-            © {new Date().getFullYear()} LoanHub. All rights reserved.
+            © {new Date().getFullYear()} ElitePaisa. All rights reserved.
           </p>
 
           <div className="flex gap-6 text-sm">
-            <a href="#" className="hover:text-blue-400 transition">
+            <Link
+              to="/privacy-policy"
+              className="hover:text-blue-400 transition"
+            >
               Privacy Policy
-            </a>
+            </Link>
 
-            <a href="#" className="hover:text-blue-400 transition">
+            <Link
+              to="/terms"
+              className="hover:text-blue-400 transition"
+            >
               Terms & Conditions
-            </a>
+            </Link>
 
-            <a href="#" className="hover:text-blue-400 transition">
+            <Link
+              to="/cookie-policy"
+              className="hover:text-blue-400 transition"
+            >
               Cookie Policy
-            </a>
+            </Link>
           </div>
         </div>
       </div>
     </footer>
   );
 };
-
+ 
 export default Footer;

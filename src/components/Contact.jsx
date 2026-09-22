@@ -61,7 +61,7 @@ const faqs = [
   },
   {
     question: "Can I repay my loan early?",
-    answer: "Yes, early repayment options are available depending on your loan agreement.",
+    answer: "Yes, early rep ayment options are available depending on your loan agreement.",
   },
 ];
 
