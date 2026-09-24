@@ -17,6 +17,7 @@ import Register from "../src/pages/Register"
 import PersonalLoan from "./pages/PersonalLoan";
 import Profile from "./pages/Profile";
 import ForgotPassword from "./components/Forget";
+import Chatbot from "./components/Chatbot";
 
 
 function App() {
@@ -47,6 +48,7 @@ function App() {
       </Routes>
 
       {!hideFooter && <Footer />}
+      <Chatbot />
     </>
   );
 }

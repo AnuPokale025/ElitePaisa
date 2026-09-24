@@ -123,7 +123,7 @@ const Footer = () => {
 
               <div className="flex gap-3">
                 <Mail className="text-blue-500" size={20} />
-                <p>support@loanhub.com</p>
+                <p>eliteassociate3@gmail.com</p>
               </div>
             </div>
           </div>
