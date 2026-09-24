@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import LoanLandingPage from "./pages/LoanLandingpage";
@@ -15,9 +15,13 @@ import VehicleLoan from "./pages/VehicleLoan"
 import Login from "./pages/Login";
 import Register from "../src/pages/Register"
 import PersonalLoan from "./pages/PersonalLoan";
+import Profile from "./pages/Profile";
 
 
 function App() {
+  const { pathname } = useLocation();
+  const hideFooter = pathname === "/login" || pathname === "/register";
+
   return (
     <>
       <Navbar />
@@ -36,9 +40,10 @@ function App() {
         <Route path="vehicle-loan" element={<VehicleLoan />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
 
-      <Footer />
+      {!hideFooter && <Footer />}
     </>
   );
 }

@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"
-import { Search, Menu } from "lucide-react"
+import { Menu, User, X } from "lucide-react"
 import { ChevronDown } from "lucide-react";
+import { useAuth } from "../context/Authcontext";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
+  const { user } = useAuth();
   const [selectedLoan, setSelectedLoan] = useState("");
 
 
@@ -149,19 +151,31 @@ const Navbar = () => {
           {/* Right Side */}
           <div className="hidden lg:flex items-center gap-4">
 
+            {user ? (
+              <button
+                onClick={() => navigate("/profile")}
+                className="flex items-center gap-2 px-5 py-2 border border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50 transition"
+              >
+                <User size={18} />
+                Profile
+              </button>
+            ) : (
+              <>
+                <button
+                  onClick={() => navigate("/login")}
+                  className="px-5 py-2 border border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50 transition"
+                >
+                  Login
+                </button>
 
-
-            <button 
-            onClick={()=>{navigate('/login')}}
-            className="px-5 py-2 border border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50 transition">
-              Login
-            </button>
-
-            <button
-            onClick={()=>{navigate('/register')}}
-            className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold transition">
-              Register
-            </button>
+                <button
+                  onClick={() => navigate("/register")}
+                  className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold transition"
+                >
+                  Register
+                </button>
+              </>
+            )}
 
           </div>
 
@@ -245,13 +259,31 @@ const Navbar = () => {
 
           <div className="p-6 space-y-3">
 
-            <button className="w-full border border-blue-600 py-3 rounded-lg text-blue-600 font-semibold">
-              Login
-            </button>
+            {user ? (
+              <button
+                onClick={() => navigate("/profile")}
+                className="w-full border border-blue-600 py-3 rounded-lg text-blue-600 font-semibold flex items-center justify-center gap-2"
+              >
+                <User size={18} />
+                Profile
+              </button>
+            ) : (
+              <>
+                <button
+                  onClick={() => navigate("/login")}
+                  className="w-full border border-blue-600 py-3 rounded-lg text-blue-600 font-semibold"
+                >
+                  Login
+                </button>
 
-            <button className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold">
-              Apply Now
-            </button>
+                <button
+                  onClick={() => navigate("/register")}
+                  className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold"
+                >
+                  Register
+                </button>
+              </>
+            )}
 
           </div>
 

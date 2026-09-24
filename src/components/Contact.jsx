@@ -39,7 +39,7 @@ const contactInfo = [
   {
     icon: Mail,
     title: "Email us",
-    value: "hello@eliteassociate.in",
+    value: "info@eliteassociates.in",
     description: "Reply within 24 hours",
   },
   {

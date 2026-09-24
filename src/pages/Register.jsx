@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   User,
   Mail,
@@ -8,9 +8,72 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import AuthApi from "../api/auth.api";
+
 
 const Register = () => {
   const navigate = useNavigate();
+
+  const [formData, setFormData] = useState({
+    email: "",
+    name: "",
+    phone: "",
+    role: "",
+    password: "",
+    confirmPassword: "",
+    terms: false,
+  });
+
+  const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const goToLogin = () => {
+    navigate("/login");
+  };
+
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: type === "checkbox" ? checked : value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+    setLoading(true);
+
+    try {
+      const registerData = {
+        email: formData.email,
+        name: formData.name,
+        phone: formData.phone,
+        role: formData.role,
+        password: formData.password,
+      };
+
+      const res = await AuthApi.signup(registerData);
+      console.log(res.data);
+      if (res) {
+        navigate("/login", {
+          replace: true,
+          state: {
+            message: "Signup successful! Please login.",
+            email: formData.email,
+          },
+        });
+      }
+
+    } catch (err) {
+      console.log(err.response?.data);
+      console.log(err.message);
+      setError(err?.message || "Registration failed");
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center px-4 py-10">
       <div className="max-w-6xl w-full bg-white rounded-3xl shadow-2xl overflow-hidden grid lg:grid-cols-2">
@@ -61,7 +124,7 @@ const Register = () => {
               Register to access our loan services.
             </p>
 
-            <form className="mt-8 space-y-5">
+            <form className="mt-8 space-y-5" onSubmit={handleSubmit}>
 
               {/* Full Name */}
               <div>
@@ -74,6 +137,9 @@ const Register = () => {
 
                   <input
                     type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
                     placeholder="Enter your full name"
                     className="w-full outline-none"
                   />
@@ -91,6 +157,9 @@ const Register = () => {
 
                   <input
                     type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
                     placeholder="Enter your email"
                     className="w-full outline-none"
                   />
@@ -108,9 +177,38 @@ const Register = () => {
 
                   <input
                     type="tel"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
                     placeholder="Enter mobile number"
                     className="w-full outline-none"
                   />
+                </div>
+              </div>
+
+              {/* Role */}
+              <div>
+                <label className="block text-gray-700 font-medium mb-2">
+                  Role
+                </label>
+
+                <div className="flex items-center border rounded-xl px-4 py-3 focus-within:border-blue-600">
+                  <ShieldCheck className="text-gray-400 mr-3" size={20} />
+
+                  <select
+                    name="role"
+                    value={formData.role}
+                    onChange={handleChange}
+                    defaultValue=""
+                    required
+                    className="w-full outline-none bg-transparent"
+                  >
+                    <option value="" disabled>
+                      Select your role
+                    </option>
+                    <option value="user">User</option>
+                    <option value="admin">Admin</option>
+                  </select>
                 </div>
               </div>
 
@@ -125,6 +223,9 @@ const Register = () => {
 
                   <input
                     type="password"
+                    name="password"
+                    value={formData.password}
+                    onChange={handleChange}
                     placeholder="Create password"
                     className="w-full outline-none"
                   />
@@ -142,6 +243,9 @@ const Register = () => {
 
                   <input
                     type="password"
+                    name="confirmPassword"
+                    value={formData.confirmPassword}
+                    onChange={handleChange}
                     placeholder="Confirm password"
                     className="w-full outline-none"
                   />
@@ -152,6 +256,9 @@ const Register = () => {
               <div className="flex items-start gap-2">
                 <input
                   type="checkbox"
+                  name="terms"
+                  checked={formData.terms}
+                  onChange={handleChange}
                   className="mt-1"
                 />
 
@@ -170,6 +277,7 @@ const Register = () => {
               {/* Register Button */}
               <button
                 type="submit"
+                onClick={handleSubmit}
                 className="w-full bg-blue-700 hover:bg-blue-800 text-white py-3 rounded-xl font-semibold flex justify-center items-center gap-2 transition"
               >
                 Create Account
@@ -179,7 +287,7 @@ const Register = () => {
               {/* Login */}
               <button
 
-              onClick={()=>{navigate('/login')}}
+                onClick={() => { navigate('/login') }}
                 type="button"
                 className="w-full border-2 border-blue-700 text-blue-700 hover:bg-blue-700 hover:text-white py-3 rounded-xl font-semibold transition"
               >

@@ -1,10 +1,80 @@
 import React from "react";
 import { Mail, Lock, ShieldCheck, ArrowRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import AuthApi from "../api/auth.api";
+import { useAuth } from "../context/Authcontext";
 
 const Login = () => {
-
   const navigate = useNavigate();
+  const { login } = useAuth();
+  const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [formData, setFormdata] = useState({
+    email: "",
+    password: "",
+  });
+
+  const ForgetRoute = () => {
+    navigate("/forget");
+  };
+
+  const change = () => {
+    navigate("/register");
+  };
+
+  const handleChange = (e) => {
+    setFormdata({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      setLoading(true);
+
+      if (!formData.email || !formData.password) {
+        alert("All fields are required");
+        return;
+      }
+
+      const loginData = {
+        email: formData.email,
+        password: formData.password,
+      };
+
+      const response = await AuthApi.login(loginData);
+      const payload = response?.data ?? response;
+      const { token, role, account, user } = payload;
+
+      if (!token) {
+        alert("Login failed. Please try again.");
+        return;
+      }
+
+      const loggedInUser = account || user || { email: formData.email };
+      login(loggedInUser, token);
+
+      const findrole = String(role || "").toLowerCase();
+
+      if (findrole === "admin") {
+        navigate("/admin", { replace: true });
+      } else if (findrole === "user") {
+        navigate("/", { replace: true });
+      } else {
+        alert("Invalid user role");
+      }
+    } catch (error) {
+      const message = error?.response?.data?.message || error?.message || "Login failed";
+      alert(message);
+      console.error(message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center px-4 py-10">
@@ -67,7 +137,10 @@ const Login = () => {
                   <Mail className="text-gray-400 mr-3" size={20} />
 
                   <input
-                    type="email"
+                    type="text"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
                     placeholder="Enter your email"
                     className="w-full outline-none"
                   />
@@ -85,6 +158,9 @@ const Login = () => {
 
                   <input
                     type="password"
+                    name="password"
+                    value={formData.password}
+                    onChange={handleChange}
                     placeholder="Enter password"
                     className="w-full outline-none"
                   />
@@ -109,6 +185,7 @@ const Login = () => {
               {/* Login */}
               <button
                 type="submit"
+                onClick={handleSubmit}
                 className="w-full bg-blue-700 hover:bg-blue-800 text-white py-3 rounded-xl font-semibold flex justify-center items-center gap-2 transition"
               >
                 Login
@@ -118,7 +195,7 @@ const Login = () => {
               {/* Register */}
               <button
                 type="button"
-              onClick={()=>{navigate('/register')}}
+                onClick={() => { navigate('/register') }}
                 className="w-full border-2 border-blue-700 text-blue-700 hover:bg-blue-700 hover:text-white py-3 rounded-xl font-semibold transition"
               >
                 Create New Account
