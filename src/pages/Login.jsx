@@ -19,6 +19,8 @@ const Login = () => {
     navigate("/forget");
   };
 
+  
+
   const change = () => {
     navigate("/register");
   };
@@ -176,6 +178,7 @@ const Login = () => {
 
                 <button
                   type="button"
+                  onClick={ForgetRoute}
                   className="text-blue-600 hover:text-blue-700 text-sm font-semibold"
                 >
                   Forgot Password?

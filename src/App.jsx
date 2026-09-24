@@ -16,6 +16,7 @@ import Login from "./pages/Login";
 import Register from "../src/pages/Register"
 import PersonalLoan from "./pages/PersonalLoan";
 import Profile from "./pages/Profile";
+import ForgotPassword from "./components/Forget";
 
 
 function App() {
@@ -41,6 +42,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/forget" element={<ForgotPassword />} />
+        <Route path="*" element={<h1 className="text-center text-3xl mt-20">404 Not Found</h1>} />
       </Routes>
 
       {!hideFooter && <Footer />}
