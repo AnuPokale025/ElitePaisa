@@ -5,6 +5,7 @@ const quickQuestions = [
   "Which loan is right for me?",
   "What documents do I need?",
   "How can I calculate my EMI?",
+  "Contact Us"
 ];
 
 const getReply = (question) => {
@@ -20,6 +21,9 @@ const getReply = (question) => {
 
   if (normalizedQuestion.includes("which") || normalizedQuestion.includes("right")) {
     return "We offer personal, home, business, education, and vehicle loans. Tell me your goal and I can point you to the most relevant option.";
+  }
+  if (normalizedQuestion.includes("Contact") || normalizedQuestion.includes("us")) {
+    return "You can reach our customer support team at hr@eliteassociate.in or call us at 9730893320.";
   }
 
   return "I can help with loan options, documents, and EMI planning. Choose a question above or send me your own question.";

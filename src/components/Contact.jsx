@@ -33,19 +33,19 @@ const contactInfo = [
   {
     icon: Phone,
     title: "Call us",
-    value: "+91 98765 43210",
+    value: "+91 98504 55807, +91 97308 93320",
     description: "Available Monday to Saturday",
   },
   {
     icon: Mail,
     title: "Email us",
-    value: "info@eliteassociates.in",
+    value: "hr@eliteassociate.in",
     description: "Reply within 24 hours",
   },
   {
     icon: MapPin,
     title: "Visit office",
-    value: "Nagpur, Maharashtra",
+    value: " 501, 5th Floor, Mohata Apartment, B/H SBI Bank, Katol Road, Chaoni, Nagpur - 440013, Maharashtra, India",
     description: "Corporate head office",
   },
 ];
@@ -284,7 +284,7 @@ const Contact = () => {
               <div>
                 <div className="ct-hours-row">
                   <Clock size={19} />
-                  <p style={{ margin: 0 }}>Monday – Friday: 9:00 AM – 6:00 PM</p>
+                  <p style={{ margin: 0 }}>Monday – Saturday: 9:00 AM – 6:00 PM</p>
                 </div>
                 <div className="ct-hours-row">
                   <Clock size={19} />

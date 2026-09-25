@@ -106,24 +106,51 @@ const Footer = () => {
               Contact Us
             </h3>
 
-            <div className="space-y-5">
-              <div className="flex gap-3">
-                <MapPin className="text-blue-500 mt-1" size={20} />
-                <p>
-                  Elite Associate in Nagpur,
+            <div className="space-y-5 text-gray-300">
+              {/* Address */}
+              <div className="flex items-start gap-3">
+                <MapPin
+                  className="text-blue-500 mt-1 flex-shrink-0"
+                  size={20}
+                />
+
+                <p className="leading-6">
+                  501, 5th Floor, Mohata Apartment, B/H SBI Bank,
                   <br />
-                  Nagpur, Maharashtra
+                  Katol Road, Chaoni, Nagpur - 440013,
+                  <br />
+                  Maharashtra, India
                 </p>
               </div>
 
-              <div className="flex gap-3">
-                <Phone className="text-blue-500" size={20} />
-                <p>+91 98765 43210</p>
+              {/* Phone */}
+              <div className="flex items-center gap-3">
+                <Phone
+                  className="text-blue-500 flex-shrink-0"
+                  size={20}
+                />
+
+                <a
+                  href="tel:+919850455807"
+                  className="hover:text-blue-500 transition-colors"
+                >
+                  +91 98504 55807,  <br />+91 97308 93320
+                </a>
               </div>
 
-              <div className="flex gap-3">
-                <Mail className="text-blue-500" size={20} />
-                <p>eliteassociate3@gmail.com</p>
+              {/* Email */}
+              <div className="flex items-center gap-3">
+                <Mail
+                  className="text-blue-500 flex-shrink-0"
+                  size={20}
+                />
+
+                <a
+                  href="mailto:hr@eliteassociate.in"
+                  className="hover:text-blue-500 transition-colors"
+                >
+                  hr@eliteassociate.in
+                </a>
               </div>
             </div>
           </div>
@@ -193,5 +220,5 @@ const Footer = () => {
     </footer>
   );
 };
- 
+
 export default Footer;

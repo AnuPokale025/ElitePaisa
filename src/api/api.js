@@ -1,48 +1,58 @@
+
 import axios from "axios";
-import Cookies from 'js-cookie'
+import Cookies from "js-cookie";
 
-const API_URL = "http://localhost:3000";
+// Backend API URL
+const API_URL = "https://elitepaisa-backend.onrender.com";
 
+// Create Axios instance
 const api = axios.create({
-    baseURL: API_URL,
-    withCredentials: true
+  baseURL: API_URL,
+  withCredentials: true,
+  headers: {
+    "Content-Type": "application/json",
+  },
 });
 
 // Request Interceptor
 api.interceptors.request.use(
-    (config) => {
-        const token = Cookies.get("token");
+  (config) => {
+    const token = Cookies.get("token");
 
-        if (token) {
-            config.headers["Authorization"] = `Bearer ${token}`;
-        }
-
-        return config;
-    },
-    (error) => {
-        return Promise.reject(error);
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
     }
+
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
 );
 
 // Response Interceptor
 api.interceptors.response.use(
-    (response) => response,
-    (error) => {
+  (response) => {
+    return response;
+  },
+  (error) => {
+    console.error(
+      "API Error:",
+      error.response?.data || error.message
+    );
 
+    // Auto logout if token is expired/invalid
+    if (error.response?.status === 401) {
+      Cookies.remove("token");
 
-        console.error(
-            "API Error:",
-            error.response?.data || error.message
-        );
-
-        // Auto logout if token expired
-        if (error.response?.status === 401) {
-            Cookies.remove("token");
-            window.location.href = "/login";
-        }
-
-        return Promise.reject(error);
+      // Avoid redirect loop if already on login page
+      if (window.location.pathname !== "/login") {
+        window.location.href = "/login";
+      }
     }
+
+    return Promise.reject(error);
+  }
 );
 
 export default api;
